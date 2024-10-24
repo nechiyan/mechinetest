@@ -21,6 +21,7 @@ const MemoryGame = () => {
 
   const [cards, setCards] = useState(shuffleCards(initialCards));
   const [flippedCards, setFlippedCards] = useState([]);
+  const [score, setScore] = useState(0);
 
 
   const flipCard = (index) => {
@@ -40,15 +41,21 @@ const MemoryGame = () => {
       checkForMatch(newCards, flippedCards[0], index);
     }
   };
+  const updateScore = () => {
+    console.log(score,'sasdad');
+    
+    setScore(score + 1);
+  };
 
   const checkForMatch = (newCards, firstIndex, secondIndex) => {
     console.log(`Comparing card values: ${newCards[firstIndex].value} and ${newCards[secondIndex].value}`);
 
     if (newCards[firstIndex].value === newCards[secondIndex].value) {
-        console.log("Match found!");
+      console.log("Match found!");
       newCards[firstIndex].isMatched = true;
       newCards[secondIndex].isMatched = true;
       setFlippedCards([]);
+      updateScore();
     } else {
       setTimeout(() => {
         newCards[firstIndex].isFlipped = false;
@@ -59,10 +66,12 @@ const MemoryGame = () => {
     }
   };
 
+  
+
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold mb-4">Memory Card Game</h1>
+      <h1 className="text-4xl font-bold mb-4">Memory Card shuffle game</h1>
       <div className="grid grid-cols-4 gap-4">
         {cards.map((card, index) => (
           <div
@@ -74,6 +83,7 @@ const MemoryGame = () => {
         </div>
         ))}
       </div>
+      <p>Score: {score}</p>
     </div>
   );
 };
