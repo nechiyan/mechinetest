@@ -61,7 +61,7 @@ const DebugTask = () => {
       <UserList searchTerm={search} />
       <div>
         {notifications.map((note, index) => (
-          <div>{note}</div>
+          <div key={index}>{note}</div> //key not used here
         ))}
       </div>
     </div>
